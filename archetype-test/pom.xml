@@ -16,19 +16,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-failsafe-plugin</artifactId>-->
-<!--                <version>3.2.5</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>integration-test</goal>-->
-<!--                            <goal>verify</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-invoker-plugin</artifactId>
@@ -36,59 +23,39 @@
 
                 <executions>
                     <execution>
-                        <id>integration-test</id>
-                        <phase>integration-test</phase>
+                        <id>archetype-generation-test</id>
+                        <phase>generate-test-resources</phase>
                         <goals>
-<!--                            <goal>install</goal>-->
                             <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
 
                 <configuration>
-<!--                    <addTestClassPath>true</addTestClassPath>-->
                     <projectsDirectory>src/it</projectsDirectory>
                     <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                     <debug>true</debug>
-<!--                    <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>-->
-
-<!--                    <pomIncludes>-->
-<!--                        <pomInclude>*/pom.xml</pomInclude>-->
-<!--                    </pomIncludes>-->
-
-<!--                    <goals>-->
-<!--                        <goal>archetype:generate</goal>-->
-<!--                    </goals>-->
-<!--                    <properties>-->
-<!--                        <archetypeGroupId>pl.fistach</archetypeGroupId>-->
-<!--                        <archetypeArtifactId>java-cli-clean-architecture-archetype</archetypeArtifactId>-->
-<!--                        <archetypeVersion>${project.version}</archetypeVersion>-->
-<!--                        <groupId>test.generated</groupId>-->
-<!--                        <artifactId>generated-sample</artifactId>-->
-<!--                        <version>1.0.0</version>-->
-<!--                        <interactiveMode>false</interactiveMode>-->
-<!--                    </properties>-->
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter</artifactId>-->
-<!--            <version>5.12.2</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.maven.shared</groupId>-->
-<!--            <artifactId>maven-invoker</artifactId>-->
-<!--            <version>3.2.0</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>pl.fistach</groupId>
             <artifactId>java-cli-clean-architecture-archetype</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.12.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.12.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
