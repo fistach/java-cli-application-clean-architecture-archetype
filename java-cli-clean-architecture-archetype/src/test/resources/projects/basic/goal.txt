@@ -1,1 +1,1 @@
-clean install -Dmaven.repo.local=/tmp -Daether.dependencyCollector.impl=bf
+clean install -Daether.dependencyCollector.impl=bf
