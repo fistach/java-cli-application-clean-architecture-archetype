@@ -52,4 +52,9 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <modules>
+        <module>${rootArtifactId}-main</module>
+    </modules>
+
 </project>
