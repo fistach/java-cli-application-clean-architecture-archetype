@@ -9,7 +9,6 @@
         <version>${version}</version>
     </parent>
 
-    <groupId>${groupId}</groupId>
     <artifactId>${rootArtifactId}-main</artifactId>
     <packaging>jar</packaging>
     <name>${rootArtifactId} main module</name>
