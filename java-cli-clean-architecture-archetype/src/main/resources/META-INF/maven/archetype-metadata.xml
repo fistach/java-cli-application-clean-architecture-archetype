@@ -29,7 +29,11 @@ under the License.
             <directory/>
             <includes>
                 <include>.gitignore</include>
+                <include>mvnw</include>
+                <include>mvnw.cmd</include>
+                <include>.mvn/**</include>
             </includes>
+            <filtered>false</filtered>
         </fileSet>
     </fileSets>
     <modules>
