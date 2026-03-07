@@ -1,6 +1,8 @@
 package pl.fistach;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 class ArchetypeGenerationTest {
 
@@ -45,4 +48,24 @@ class ArchetypeGenerationTest {
             }
         }
     }
+
+    @Test
+    void projectShouldContainOneControllerModule() throws Exception {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (FileReader fr = new FileReader(ROOT.resolve("pom.xml").toFile())) {
+            Model model = reader.read(fr);
+            String rootArtifactId = model.getArtifactId();
+            List<String> modules = model.getModules();
+
+            int controllerCount = 0;
+
+            for (String module : modules) {
+                if (module.equals(rootArtifactId + "-controller")) {
+                    controllerCount++;
+                }
+            }
+            assertEquals(1, controllerCount, "Project should contain exactly one 'controller' module");
+        }
+    }
+
 }
