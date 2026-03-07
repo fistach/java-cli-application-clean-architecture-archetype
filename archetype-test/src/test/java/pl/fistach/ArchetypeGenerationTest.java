@@ -3,6 +3,7 @@ package pl.fistach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.junit.jupiter.api.Test;
@@ -68,4 +69,27 @@ class ArchetypeGenerationTest {
         }
     }
 
+    @Test
+    void mainModuleShouldDependOnController() throws Exception {
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Path pomPath = ROOT.resolve("pom.xml");
+
+        try (FileReader fr = new FileReader(pomPath.toFile())) {
+            Model rootModel = reader.read(fr);
+            String rootArtifactId = rootModel.getArtifactId();
+            String expectedControllerArtifact = rootArtifactId + "-controller";
+
+            Path mainModulePomPath = Path.of(ROOT.toString(), rootArtifactId + "-main", "pom.xml");
+            Model mainModel = reader.read(new FileReader(mainModulePomPath.toFile()));
+
+            long controllerDependenciesCount = mainModel.getDependencies()
+                    .stream()
+                    .map(Dependency::getArtifactId)
+                    .filter(expectedControllerArtifact::equals)
+                    .count();
+
+            assertEquals(1, controllerDependenciesCount,
+                    "Module 'main' should depend exactly once on " + expectedControllerArtifact);
+        }
+    }
 }
