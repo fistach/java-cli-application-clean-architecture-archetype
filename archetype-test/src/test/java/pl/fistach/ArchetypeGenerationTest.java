@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
@@ -18,78 +19,67 @@ class ArchetypeGenerationTest {
     private static final Path ROOT =
             Path.of("target", "it", "generate-archetype-test", "calculator");
 
-    @Test
-    void rootPomShouldHavePackagingPom() throws Exception {
-        Path pomPath = ROOT.resolve("pom.xml");
-        assertTrue(Files.exists(pomPath), "No root pom.xml");
+    private static Model model;
 
+    @BeforeAll
+    static void setUp() throws Exception {
+        Path rootPomPath = ROOT.resolve("pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
-        try (FileReader fr = new FileReader(pomPath.toFile())) {
-            Model model = reader.read(fr);
 
-            assertEquals("pom", model.getPackaging(),
-                    "Root POM should have packaging=pom");
+        try (FileReader fr = new FileReader(rootPomPath.toFile())) {
+            model = reader.read(fr);
         }
     }
 
     @Test
-    void projectShouldContainModules() throws Exception {
-        Path pomPath = ROOT.resolve("pom.xml");
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        try (FileReader fr = new FileReader(pomPath.toFile())) {
-            Model model = reader.read(fr);
+    void rootPomShouldHavePackagingPom() {
+        assertEquals("pom", model.getPackaging(),
+                "Root POM should have packaging=pom");
+    }
 
-            assertFalse(model.getModules().isEmpty(),
-                    "Project should contain modules, but <modules> list is empty");
+    @Test
+    void projectShouldContainModules() {
+        assertFalse(model.getModules().isEmpty(),
+                "Project should contain modules, but <modules> list is empty");
 
-            for (String module : model.getModules()) {
-                Path moduleDir = ROOT.resolve(module);
-                assertTrue(Files.exists(moduleDir),
-                        "module dir doesn't exist: " + moduleDir);
-            }
+        for (String module : model.getModules()) {
+            Path moduleDir = ROOT.resolve(module);
+            assertTrue(Files.exists(moduleDir),
+                    "module dir doesn't exist: " + moduleDir);
         }
     }
 
     @Test
-    void projectShouldContainOneControllerModule() throws Exception {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        try (FileReader fr = new FileReader(ROOT.resolve("pom.xml").toFile())) {
-            Model model = reader.read(fr);
-            String rootArtifactId = model.getArtifactId();
-            List<String> modules = model.getModules();
+    void projectShouldContainOneControllerModule() {
+        String rootArtifactId = model.getArtifactId();
+        List<String> modules = model.getModules();
 
-            int controllerCount = 0;
+        int controllerCount = 0;
 
-            for (String module : modules) {
-                if (module.equals(rootArtifactId + "-controller")) {
-                    controllerCount++;
-                }
+        for (String module : modules) {
+            if (module.equals(rootArtifactId + "-controller")) {
+                controllerCount++;
             }
-            assertEquals(1, controllerCount, "Project should contain exactly one 'controller' module");
         }
+        assertEquals(1, controllerCount, "Project should contain exactly one 'controller' module");
     }
 
     @Test
     void mainModuleShouldDependOnController() throws Exception {
+        String rootArtifactId = model.getArtifactId();
+        String expectedControllerArtifact = rootArtifactId + "-controller";
+
+        Path mainModulePomPath = Path.of(ROOT.toString(), rootArtifactId + "-main", "pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
-        Path pomPath = ROOT.resolve("pom.xml");
+        Model mainModel = reader.read(new FileReader(mainModulePomPath.toFile()));
 
-        try (FileReader fr = new FileReader(pomPath.toFile())) {
-            Model rootModel = reader.read(fr);
-            String rootArtifactId = rootModel.getArtifactId();
-            String expectedControllerArtifact = rootArtifactId + "-controller";
+        long controllerDependenciesCount = mainModel.getDependencies()
+                .stream()
+                .map(Dependency::getArtifactId)
+                .filter(expectedControllerArtifact::equals)
+                .count();
 
-            Path mainModulePomPath = Path.of(ROOT.toString(), rootArtifactId + "-main", "pom.xml");
-            Model mainModel = reader.read(new FileReader(mainModulePomPath.toFile()));
-
-            long controllerDependenciesCount = mainModel.getDependencies()
-                    .stream()
-                    .map(Dependency::getArtifactId)
-                    .filter(expectedControllerArtifact::equals)
-                    .count();
-
-            assertEquals(1, controllerDependenciesCount,
-                    "Module 'main' should depend exactly once on " + expectedControllerArtifact);
-        }
+        assertEquals(1, controllerDependenciesCount,
+                "Module 'main' should depend exactly once on " + expectedControllerArtifact);
     }
 }
