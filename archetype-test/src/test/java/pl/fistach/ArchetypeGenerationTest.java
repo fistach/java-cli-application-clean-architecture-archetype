@@ -99,5 +99,20 @@ class ArchetypeGenerationTest {
                 "Module 'main' should depend exactly once on " + expectedControllerArtifact);
     }
 
+    @Test
+    void rootPomShouldContainJUnit5Dependency() {
+        //given
+        List<Dependency> dependencies = model.getDependencies();
+
+        //when
+        boolean hasJUnit5 = dependencies.stream().anyMatch(dep ->
+                "org.junit.jupiter".equals(dep.getGroupId()) &&
+                        "junit-jupiter".equals(dep.getArtifactId()) &&
+                        "test".equals(dep.getScope())
+        );
+
+        //then
+        assertTrue(hasJUnit5, "Root pom.xml should contain JUnit 5 dependency (junit-jupiter, scope=test)");
+    }
 
 }
