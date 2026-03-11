@@ -9,20 +9,15 @@
         <version>${version}</version>
     </parent>
 
-    <artifactId>${rootArtifactId}-service</artifactId>
+    <artifactId>${rootArtifactId}-repository-api</artifactId>
     <packaging>jar</packaging>
-    <name>${rootArtifactId} service module</name>
+    <name>${rootArtifactId} repository interfaces module</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-repository-api</artifactId>
-            <version>${version}</version>
-        </dependency>
     </dependencies>
 
     <build>
