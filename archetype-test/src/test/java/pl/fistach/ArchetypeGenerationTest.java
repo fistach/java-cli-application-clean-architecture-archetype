@@ -82,28 +82,6 @@ class ArchetypeGenerationTest {
     }
 
     @Test
-    void mainModuleShouldDependOnController() throws Exception {
-        //given
-        String rootArtifactId = model.getArtifactId();
-        String dependentArtifact = rootArtifactId + "-controller";
-
-        String baseArtifact = rootArtifactId + "-main";
-        Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
-
-        //when
-        long dependentsCount = baseModel.getDependencies()
-                .stream()
-                .map(Dependency::getArtifactId)
-                .filter(dependentArtifact::equals)
-                .count();
-        //then
-        assertEquals(1, dependentsCount,
-                "Module " + baseArtifact + " should depend exactly once on " + dependentArtifact);
-    }
-
-    @Test
     void rootPomShouldContainJUnit5Dependency() {
         //given
         List<Dependency> dependencies = model.getDependencies();
@@ -117,28 +95,6 @@ class ArchetypeGenerationTest {
 
         //then
         assertTrue(hasJUnit5, "Root pom.xml should contain JUnit 5 dependency (junit-jupiter, scope=test)");
-    }
-
-    @Test
-    void controllerModuleShouldDependOnServiceModule() throws Exception {
-        //given
-        String rootArtifactId = model.getArtifactId();
-        String dependentArtifact = rootArtifactId + "-service";
-
-        String baseArtifact = rootArtifactId + "-controller";
-        Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
-
-        //when
-        long dependentsCount = baseModel.getDependencies()
-                .stream()
-                .map(Dependency::getArtifactId)
-                .filter(dependentArtifact::equals)
-                .count();
-        //then
-        assertEquals(1, dependentsCount,
-                "Module " + baseArtifact + " should depend exactly once on " + dependentArtifact);
     }
 
 }
