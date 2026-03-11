@@ -9,20 +9,15 @@
         <version>${version}</version>
     </parent>
 
-    <artifactId>${rootArtifactId}-repository-api</artifactId>
+    <artifactId>${rootArtifactId}-domain</artifactId>
     <packaging>jar</packaging>
-    <name>${rootArtifactId} repository interfaces module</name>
+    <name>${rootArtifactId} domain models module</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${rootArtifactId}-domain</artifactId>
-            <version>${version}</version>
-        </dependency>
     </dependencies>
 
     <build>
