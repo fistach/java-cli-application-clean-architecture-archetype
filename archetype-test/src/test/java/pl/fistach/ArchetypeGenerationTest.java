@@ -55,7 +55,10 @@ class ArchetypeGenerationTest {
                     "module dir doesn't exist: " + moduleDir);
         });
 
-        Set<String> expectedModules = Set.of(ARTIFACT_ID + "-main", ARTIFACT_ID + "-controller");
+        Set<String> expectedModules = Set.of(ARTIFACT_ID + "-main",
+                ARTIFACT_ID + "-controller",
+                ARTIFACT_ID + "-service"
+        );
         assertEquals(expectedModules, new HashSet<>(modules));
     }
 
@@ -113,6 +116,28 @@ class ArchetypeGenerationTest {
 
         //then
         assertTrue(hasJUnit5, "Root pom.xml should contain JUnit 5 dependency (junit-jupiter, scope=test)");
+    }
+
+    @Test
+    void controllerModuleShouldDependOnServiceModule() throws Exception {
+        //given
+        String rootArtifactId = model.getArtifactId();
+        String dependentArtifact = rootArtifactId + "-service";
+
+        String baseArtifact = rootArtifactId + "-controller";
+        Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
+
+        //when
+        long dependentsCount = baseModel.getDependencies()
+                .stream()
+                .map(Dependency::getArtifactId)
+                .filter(dependentArtifact::equals)
+                .count();
+        //then
+        assertEquals(1, dependentsCount,
+                "Module " + baseArtifact + " should depend exactly once on " + dependentArtifact);
     }
 
 }
