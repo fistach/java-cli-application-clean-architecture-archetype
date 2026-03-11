@@ -34,7 +34,8 @@ class ArchetypeModuleDependenciesTest {
     private static Stream<Arguments> dependentModules() {
         return Stream.of(
                 Arguments.of("main", "controller"),
-                Arguments.of("controller", "service")
+                Arguments.of("controller", "service"),
+                Arguments.of("service", "repository-api")
         );
     }
 

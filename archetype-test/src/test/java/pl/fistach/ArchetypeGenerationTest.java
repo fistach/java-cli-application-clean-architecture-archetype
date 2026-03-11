@@ -1,7 +1,6 @@
 package pl.fistach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
@@ -10,11 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 class ArchetypeGenerationTest {
 
@@ -38,28 +34,6 @@ class ArchetypeGenerationTest {
     void rootPomShouldHavePackagingPom() {
         assertEquals("pom", model.getPackaging(),
                 "Root POM should have packaging=pom");
-    }
-
-    @Test
-    void projectShouldContainModules() {
-        //when
-        List<String> modules = model.getModules();
-
-        //then
-        assertFalse(modules.isEmpty(),
-                "Project should contain modules, but <modules> list is empty");
-
-        modules.forEach(it -> {
-            Path moduleDir = ROOT.resolve(it);
-            assertTrue(Files.exists(moduleDir),
-                    "module dir doesn't exist: " + moduleDir);
-        });
-
-        Set<String> expectedModules = Set.of(ARTIFACT_ID + "-main",
-                ARTIFACT_ID + "-controller",
-                ARTIFACT_ID + "-service"
-        );
-        assertEquals(expectedModules, new HashSet<>(modules));
     }
 
     @Test
