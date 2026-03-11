@@ -85,21 +85,22 @@ class ArchetypeGenerationTest {
     void mainModuleShouldDependOnController() throws Exception {
         //given
         String rootArtifactId = model.getArtifactId();
-        String expectedControllerArtifact = rootArtifactId + "-controller";
+        String dependentArtifact = rootArtifactId + "-controller";
 
-        Path mainModulePomPath = Path.of(ROOT.toString(), rootArtifactId + "-main", "pom.xml");
+        String baseArtifact = rootArtifactId + "-main";
+        Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model mainModel = reader.read(new FileReader(mainModulePomPath.toFile()));
+        Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
 
         //when
-        long controllerDependenciesCount = mainModel.getDependencies()
+        long dependentsCount = baseModel.getDependencies()
                 .stream()
                 .map(Dependency::getArtifactId)
-                .filter(expectedControllerArtifact::equals)
+                .filter(dependentArtifact::equals)
                 .count();
         //then
-        assertEquals(1, controllerDependenciesCount,
-                "Module 'main' should depend exactly once on " + expectedControllerArtifact);
+        assertEquals(1, dependentsCount,
+                "Module " + baseArtifact + " should depend exactly once on " + dependentArtifact);
     }
 
     @Test
