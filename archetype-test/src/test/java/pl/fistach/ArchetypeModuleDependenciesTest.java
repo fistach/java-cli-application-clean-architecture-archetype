@@ -5,10 +5,13 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.FileReader;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 class ArchetypeModuleDependenciesTest {
 
@@ -28,35 +31,21 @@ class ArchetypeModuleDependenciesTest {
         }
     }
 
-    @Test
-    void mainModuleShouldDependOnController() throws Exception {
-        //given
-        String rootArtifactId = model.getArtifactId();
-        String dependentArtifact = rootArtifactId + "-controller";
-
-        String baseArtifact = rootArtifactId + "-main";
-        Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
-
-        //when
-        long dependentsCount = baseModel.getDependencies()
-                .stream()
-                .map(Dependency::getArtifactId)
-                .filter(dependentArtifact::equals)
-                .count();
-        //then
-        assertEquals(1, dependentsCount,
-                "Module " + baseArtifact + " should depend exactly once on " + dependentArtifact);
+    private static Stream<Arguments> dependentModules() {
+        return Stream.of(
+                Arguments.of("main", "controller"),
+                Arguments.of("controller", "service")
+        );
     }
 
-    @Test
-    void controllerModuleShouldDependOnServiceModule() throws Exception {
+    @ParameterizedTest
+    @MethodSource("dependentModules")
+    void mainModuleAShouldDependOnModuleB(String base, String dependent) throws Exception {
         //given
         String rootArtifactId = model.getArtifactId();
-        String dependentArtifact = rootArtifactId + "-service";
+        String dependentArtifact = rootArtifactId + "-"+dependent;
 
-        String baseArtifact = rootArtifactId + "-controller";
+        String baseArtifact = rootArtifactId + "-"+base;
         Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
         Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
