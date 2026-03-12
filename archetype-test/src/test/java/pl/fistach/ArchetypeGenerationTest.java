@@ -9,8 +9,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 class ArchetypeGenerationTest {
 
@@ -71,4 +75,27 @@ class ArchetypeGenerationTest {
         assertTrue(hasJUnit5, "Root pom.xml should contain JUnit 5 dependency (junit-jupiter, scope=test)");
     }
 
+    @Test
+    void controllerModuleShouldContainDefaultControllerClass() throws IOException {
+        //given
+        Path controllerSrcRoot = ROOT.resolve(Path.of(
+                model.getArtifactId() + "-controller",
+                "src",
+                "main",
+                "java"));
+
+        Optional<Path> optionalController = findController(controllerSrcRoot);
+
+        assertTrue(optionalController.isPresent(), "Controller.java should exist in controller module"
+        );
+    }
+
+    private static Optional<Path> findController(Path startDir) throws IOException {
+        try (Stream<Path> paths = Files.walk(startDir)) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.getFileName().toString().equals("DefaultController.java"))
+                    .findFirst();
+        }
+    }
 }
