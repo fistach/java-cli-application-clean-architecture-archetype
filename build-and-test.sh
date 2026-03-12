@@ -1,5 +1,5 @@
 cd java-cli-clean-architecture-archetype
 mvn clean install
 cd ../archetype-test
-mvn integration-test
+mvn clean integration-test
 cd ..
