@@ -36,7 +36,8 @@ class ArchetypeModuleDependenciesTest {
                 Arguments.of("main", "controller"),
                 Arguments.of("controller", "service"),
                 Arguments.of("service", "repository-api"),
-                Arguments.of("repository-api", "domain")
+                Arguments.of("repository-api", "domain"),
+                Arguments.of("repository-impl", "repository-api")
         );
     }
 
