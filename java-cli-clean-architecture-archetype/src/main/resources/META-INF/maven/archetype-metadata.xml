@@ -47,7 +47,8 @@ under the License.
                 </fileSet>
             </fileSets>
         </module>
-        <module id="${rootArtifactId}-controller" dir="__rootArtifactId__-controller" name="${rootArtifactId}-controller">
+        <module id="${rootArtifactId}-controller" dir="__rootArtifactId__-controller"
+                name="${rootArtifactId}-controller">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -79,7 +80,8 @@ under the License.
                 </fileSet>
             </fileSets>
         </module>
-        <module id="${rootArtifactId}-repository-api" dir="__rootArtifactId__-repository-api" name="${rootArtifactId}-repository-api">
+        <module id="${rootArtifactId}-repository-api" dir="__rootArtifactId__-repository-api"
+                name="${rootArtifactId}-repository-api">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
@@ -96,28 +98,29 @@ under the License.
                     <includes>
                         <include>**/*.java</include>
                     </includes>
-                    <fileSet filtered="true" packaged="true" encoding="UTF-8">
-                        <directory>src/test/java</directory>
-                        <includes>
-                            <include>**/*.java</include>
-                        </includes>
-                    </fileSet>
+                </fileSet>
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
                 </fileSet>
             </fileSets>
         </module>
-        <module id="${rootArtifactId}-repository-impl" dir="__rootArtifactId__-repository-impl" name="${rootArtifactId}-repository-impl">
+        <module id="${rootArtifactId}-repository-impl" dir="__rootArtifactId__-repository-impl"
+                name="${rootArtifactId}-repository-impl">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>
                     <includes>
                         <include>**/*.java</include>
                     </includes>
-                    <fileSet filtered="true" packaged="true" encoding="UTF-8">
-                        <directory>src/test/java</directory>
-                        <includes>
-                            <include>**/*.java</include>
-                        </includes>
-                    </fileSet>
+                </fileSet>
+                <fileSet filtered="true" packaged="true" encoding="UTF-8">
+                    <directory>src/test/java</directory>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
                 </fileSet>
             </fileSets>
         </module>
