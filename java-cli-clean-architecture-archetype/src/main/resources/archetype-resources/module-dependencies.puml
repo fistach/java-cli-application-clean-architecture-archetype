@@ -1,0 +1,20 @@
+@startuml
+
+skinparam componentStyle rectangle
+skinparam roundcorner 15
+
+component "main" #FFE082
+component "controller" #80CBC4
+component "service" #81D4FA
+component "repository_api" #C5E1A5
+component "repository_impl" #A5D6A7
+component "domain" #E1BEE7
+
+main --> controller
+controller --> service
+service --> repository_api
+service --> domain
+repository_impl --> repository_api
+repository_api --> domain
+
+@enduml
