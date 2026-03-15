@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.apache.maven.archetype</groupId>
             <artifactId>archetype-common</artifactId>
-            <version>3.0.1</version>
+            <version>3.4.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -45,7 +45,7 @@
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
                 <artifactId>archetype-packaging</artifactId>
-                <version>3.2.0</version>
+                <version>3.4.1</version>
             </extension>
         </extensions>
         <pluginManagement>
@@ -56,7 +56,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-archetype-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
