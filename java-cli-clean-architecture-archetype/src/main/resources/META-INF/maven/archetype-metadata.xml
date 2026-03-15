@@ -32,6 +32,9 @@ under the License.
                 <include>mvnw</include>
                 <include>mvnw.cmd</include>
                 <include>.mvn/**</include>
+                <include>**/*.md</include>
+                <include>**/*.puml</include>
+                <include>**/*.png</include>
             </includes>
             <filtered>false</filtered>
         </fileSet>
