@@ -8,6 +8,9 @@
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
     <packaging>pom</packaging>
+    <description>Project generated from maven archetype pl.fistach:java-cli-clean-architecture-archetype,
+        https://github.com/fistach/java-cli-application-clean-architecture-archetype.
+    </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
