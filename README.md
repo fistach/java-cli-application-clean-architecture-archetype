@@ -51,6 +51,9 @@ mvn archetype:generate \
 -DinteractiveMode=false
 ```
 
+After generating the project, check the README.md files
+in each module for more information.
+
 ## Testing
 
 The archetype includes **JUnit 5** as the default testing framework.
