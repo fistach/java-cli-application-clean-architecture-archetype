@@ -14,7 +14,7 @@
 
     <scm>
         <connection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git</connection>
-        <developerConnection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
