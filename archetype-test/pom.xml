@@ -58,7 +58,7 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>pl.fistach</groupId>
+            <groupId>io.github.fistach.archetypes</groupId>
             <artifactId>java-cli-clean-architecture-archetype</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
