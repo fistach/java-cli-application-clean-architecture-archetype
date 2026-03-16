@@ -12,6 +12,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <scm>
+        <connection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <url>https://central.sonatype.com/api/v1/publisher</url>
+        </repository>
+    </distributionManagement>
+
     <modules>
         <module>java-cli-clean-architecture-archetype</module>
         <module>archetype-test</module>
