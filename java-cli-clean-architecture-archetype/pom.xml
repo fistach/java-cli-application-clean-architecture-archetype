@@ -13,6 +13,7 @@
     <scm>
         <connection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git</connection>
         <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git</developerConnection>
+        <url>https://github.com/fistach/java-cli-clean-architecture-archetype</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -118,6 +119,20 @@
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
