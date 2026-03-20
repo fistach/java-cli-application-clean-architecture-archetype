@@ -59,7 +59,7 @@ in each module for more information.
 The archetype includes **JUnit 5** as the default testing framework.
 
 Recommended testing strategy is the test-driven development, 
-with tests written test for each module as a whole,
+with tests written for each module as a whole,
 in the following order:
 
 * domain           
