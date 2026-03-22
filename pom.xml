@@ -26,6 +26,7 @@
 
     <modules>
         <module>java-cli-clean-architecture-archetype</module>
+        <module>java-clean-architecture-archetype-with-spring</module>
         <module>archetype-test</module>
     </modules>
 </project>
