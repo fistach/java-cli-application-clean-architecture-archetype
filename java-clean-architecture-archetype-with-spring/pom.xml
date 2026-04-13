@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.fistach.archetypes</groupId>
-    <artifactId>java-cli-clean-architecture-archetype</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <artifactId>java-clean-architecture-archetype-with-spring</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
-    <description>A Maven archetype for Java CLI projects using clean architecture</description>
+    <description>A Maven archetype for Java projects using clean architecture with Spring support</description>
 
     <scm>
-        <connection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git
-        </connection>
-        <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git
-        </developerConnection>
+        <connection>scm:git:https://github.com/fistach/java-cli-application-clean-architecture-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git</developerConnection>
         <url>https://github.com/fistach/java-cli-clean-architecture-archetype</url>
         <tag>HEAD</tag>
     </scm>
@@ -50,7 +47,7 @@
         </dependency>
     </dependencies>
 
-    <name>Java CLI application clean architecture archetype</name>
+    <name>Java application clean architecture archetype with Spring support</name>
 
     <url>https://github.com/fistach/java-cli-application-clean-architecture-archetype</url>
 
