@@ -37,18 +37,19 @@ class ArchetypeModuleDependenciesTest {
                 Arguments.of("controller", "service"),
                 Arguments.of("service", "repository-api"),
                 Arguments.of("repository-api", "domain"),
-                Arguments.of("repository-impl", "repository-api")
+                Arguments.of("repository-impl", "repository-api"),
+                Arguments.of("main", "repository-impl")
         );
     }
 
     @ParameterizedTest
     @MethodSource("dependentModules")
-    void mainModuleAShouldDependOnModuleB(String base, String dependent) throws Exception {
+    void moduleAShouldDependOnModuleB(String a, String b) throws Exception {
         //given
         String rootArtifactId = model.getArtifactId();
-        String dependentArtifact = rootArtifactId + "-"+dependent;
+        String dependentArtifact = rootArtifactId + "-" + b;
 
-        String baseArtifact = rootArtifactId + "-"+base;
+        String baseArtifact = rootArtifactId + "-" + a;
         Path baseModulePomPath = Path.of(ROOT.toString(), baseArtifact, "pom.xml");
         MavenXpp3Reader reader = new MavenXpp3Reader();
         Model baseModel = reader.read(new FileReader(baseModulePomPath.toFile()));
