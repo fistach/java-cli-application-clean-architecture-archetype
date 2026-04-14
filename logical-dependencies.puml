@@ -16,5 +16,6 @@ service --> repository_api
 service --> domain
 repository_impl --> repository_api
 repository_api --> domain
+main --> repository_impl
 
 @enduml
