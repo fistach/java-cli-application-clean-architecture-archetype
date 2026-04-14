@@ -23,6 +23,11 @@
             <artifactId>${rootArtifactId}-controller</artifactId>
             <version>${version}</version>
         </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}-repository-impl</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 
     <build>
