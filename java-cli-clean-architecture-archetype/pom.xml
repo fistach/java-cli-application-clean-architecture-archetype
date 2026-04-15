@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.fistach.archetypes</groupId>
     <artifactId>java-cli-clean-architecture-archetype</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>maven-archetype</packaging>
     <description>A Maven archetype for Java CLI projects using clean architecture</description>
 
@@ -16,7 +15,7 @@
         <developerConnection>scm:git:git@github.com:fistach/java-cli-application-clean-architecture-archetype.git
         </developerConnection>
         <url>https://github.com/fistach/java-cli-clean-architecture-archetype</url>
-        <tag>HEAD</tag>
+        <tag>java-cli-application-architecture-archetype-1.1.0</tag>
     </scm>
 
     <distributionManagement>
